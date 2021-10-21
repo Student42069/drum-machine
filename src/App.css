@@ -4,6 +4,7 @@
   margin: auto;
   text-align: center;
   padding: 0 10px 10px 10px;
+  user-select: none;
 }
 
 .drum-pad {
