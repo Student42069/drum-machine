@@ -18,7 +18,7 @@
   cursor: pointer;
 }
 
-#display {
+#display1 {
   display: grid;
   background-color: lightgreen;
   padding: 10px;
@@ -26,4 +26,20 @@
   width: max-content;
   gap: 10px;
   grid-template-columns: auto auto auto;
+}
+
+#board {
+  display: flex;
+  flex-direction: row;
+}
+
+#commands {
+  background-color: lightsteelblue;
+  margin-left: 10px;
+  width: 100px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
