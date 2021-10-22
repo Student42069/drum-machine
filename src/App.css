@@ -16,6 +16,7 @@
   line-height: 13vh;
   background-color: lightslategrey;
   cursor: pointer;
+  font-size: calc(2vh + 5px);
 }
 
 #display1 {
@@ -36,10 +37,28 @@
 #commands {
   background-color: lightsteelblue;
   margin-left: 10px;
-  width: 100px;
+  width: 10vw;
   padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+}
+
+p {
+  margin-bottom: 8px;
+  font-size: calc(2vh + 10px);
+}
+
+h3 {
+  font-size: calc(2vh + 10px);
+}
+
+h1 {
+  font-size: calc(4vh + 10px);
+  padding-top: 15px;
+}
+
+.myclass {
+  background-color: red;
 }

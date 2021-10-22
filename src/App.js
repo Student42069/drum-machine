@@ -3,6 +3,7 @@ import bankOne from "./bankone";
 import bankTwo from "./banktwo";
 import "./slider.css";
 import React from "react";
+import { useEffect } from "react";
 
 function App() {
   const [onOff, setOnOff] = React.useState(false);
@@ -37,15 +38,21 @@ function App() {
           })}
         </div>
         <div id="commands">
-          <label className="switch">
-            <input type="checkbox" onChange={handleOn} />
-            <span className="slider"></span>
-          </label>
+          <div>
+            <p>Power</p>
+            <label className="switch">
+              <input type="checkbox" onChange={handleOn} />
+              <span className="slider"></span>
+            </label>
+          </div>
           <h3 id="display">{name}</h3>
-          <label className="switch">
-            <input type="checkbox" onChange={handleBank} />
-            <span className="slider round"></span>
-          </label>
+          <div>
+            <p>Bank</p>
+            <label className="switch">
+              <input type="checkbox" onChange={handleBank} />
+              <span className="slider round"></span>
+            </label>
+          </div>
         </div>
       </div>
     </div>
@@ -54,19 +61,31 @@ function App() {
 
 function Drum(props) {
   let audio = new Audio(props.letter.url);
+
+  // useEffect(() => {
+  //   const handlePress = (event) => {
+  //     if (event.key.toUpperCase() === props.letter.keyTrigger) {
+  //       play();
+  //     }
+  //   };
+  //   window.addEventListener("keydown", handlePress);
+
+  //   return () => {
+  //     window.removeEventListener("keydown", handlePress);
+  //   };
+  // }, []);
+
+  const play = () => {
+    if (props.onOff) {
+      audio.pause();
+      audio.currentTime = 0;
+      audio.play();
+      props.setName(props.letter.id);
+    }
+  };
+
   return (
-    <div
-      className="drum-pad"
-      id={props.letter.id}
-      onClick={() => {
-        if (props.onOff) {
-          audio.pause();
-          audio.currentTime = 0;
-          audio.play();
-          props.setName(props.letter.id);
-        }
-      }}
-    >
+    <div className="drum-pad" id={props.letter.id} onClick={play}>
       <h2>{props.letter.keyTrigger}</h2>
       <audio
         src={props.letter.url}
