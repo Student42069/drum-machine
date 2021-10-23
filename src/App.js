@@ -3,7 +3,6 @@ import bankOne from "./bankone";
 import bankTwo from "./banktwo";
 import "./slider.css";
 import React from "react";
-import { useEffect } from "react";
 
 function App() {
   const [onOff, setOnOff] = React.useState(false);
@@ -41,7 +40,7 @@ function App() {
           <div>
             <p>Power</p>
             <label className="switch">
-              <input type="checkbox" onChange={handleOn} />
+              <input type="checkbox" id="onOff" onChange={handleOn} />
               <span className="slider"></span>
             </label>
           </div>
@@ -49,7 +48,7 @@ function App() {
           <div>
             <p>Bank</p>
             <label className="switch">
-              <input type="checkbox" onChange={handleBank} />
+              <input type="checkbox" id="bank" onChange={handleBank} />
               <span className="slider round"></span>
             </label>
           </div>
@@ -62,19 +61,6 @@ function App() {
 function Drum(props) {
   let audio = new Audio(props.letter.url);
 
-  // useEffect(() => {
-  //   const handlePress = (event) => {
-  //     if (event.key.toUpperCase() === props.letter.keyTrigger) {
-  //       play();
-  //     }
-  //   };
-  //   window.addEventListener("keydown", handlePress);
-
-  //   return () => {
-  //     window.removeEventListener("keydown", handlePress);
-  //   };
-  // }, []);
-
   const play = () => {
     if (props.onOff) {
       audio.pause();
@@ -85,7 +71,7 @@ function Drum(props) {
   };
 
   return (
-    <div className="drum-pad" id={props.letter.id} onClick={play}>
+    <div className="drum-pad button-36" id={props.letter.id} onClick={play}>
       <h2>{props.letter.keyTrigger}</h2>
       <audio
         src={props.letter.url}
@@ -95,5 +81,30 @@ function Drum(props) {
     </div>
   );
 }
+
+window.addEventListener("keydown", function (event) {
+  if (
+    "qweasdzxc".indexOf(event.key) !== -1 &&
+    document.getElementById("onOff").checked
+  ) {
+    document
+      .getElementById(event.key.toUpperCase())
+      .parentElement.classList.add("myclass");
+
+    setTimeout(function () {
+      document
+        .getElementById(event.key.toUpperCase())
+        .parentElement.classList.remove("myclass");
+    }, 100);
+
+    let audio = new Audio(document.getElementById(event.key.toUpperCase()).src);
+    audio.pause();
+    audio.currentTime = 0;
+    audio.play();
+    document.getElementById("display").textContent = document.getElementById(
+      event.key.toUpperCase()
+    ).parentElement.id;
+  }
+});
 
 export default App;
